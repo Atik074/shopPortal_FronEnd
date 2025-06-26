@@ -3,8 +3,10 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product,isTopSales }) => {
   const [addToFav , setAddToFav] = useState(false)
+
+  const discountPerProduct = (product.price * 10/100)
 
   const handleFavourite =()=>{
        setAddToFav(!addToFav)
@@ -12,7 +14,8 @@ const ProductCard = ({ product }) => {
 
 
   return (
-    <div className="relative border border-gray-700 shadow-md rounded-md">
+    <div className="relative border border-gray-700 shadow-md ">
+       
       <div className=" overflow-hidden ">
         <img
           src={product?.images[0]?.url}
@@ -21,12 +24,20 @@ const ProductCard = ({ product }) => {
           alt="picture"
         />
       </div>
-
+   
       <div className="flex justify-between">
-        <p className="text-md bg-amber-500 px-3 py-1 
-        rounded-bl-[10px] absolute shadow top-0">
-          -20tk
-        </p>
+          {isTopSales ? 
+
+          <p className="text-md  bg-fuchsia-600 text-white px-3 py-1 
+        rounded-r-[10px] absolute shadow top-0">
+           sold:{product.sold}
+        </p> 
+               :  
+        <p className="text-md bg-fuchsia-600 text-white px-3 py-1 
+        rounded-r-[10px] absolute shadow top-0">
+          -{discountPerProduct}tk
+        </p>}
+       
         <button onClick={handleFavourite} className="cursor-pointer">
           {
             addToFav ? <FaHeart className="absolute top-5 right-3 text-pink-600" size={26} /> : <FaRegHeart className="absolute top-5 right-3 text-white" size={26} />
@@ -37,8 +48,18 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="ml-6 mr-2">
-        <h2 className="text-xl font-medium mt-6">{product.name}</h2>
-        <h3 className="text-[18px] font-normal">price : {product.price}</h3>
+        <h2 className="text-xl font-medium mt-6 hover:underline cursor-pointer">{product.name}</h2>
+        <div className="flex gap-x-2 items-center">
+          { isTopSales ?    <h3 className="text-[18px] font-normal">price : {product.price}</h3> 
+          : 
+          <>
+             <h3 className="text-[18px] font-normal">price : {product.price - discountPerProduct}</h3>
+          <h3 className="text-[15px] line-through italic font-normal"> {product.price}</h3>
+          </> 
+          
+          }
+          
+        </div>
         <h3 className="text-[18px] font-normal">Brand : {product.brand}</h3>
         <p className="text-gray-600 text-[18px] mt-2 mb-6">
           {product.description.slice(0, 50)}{" "}

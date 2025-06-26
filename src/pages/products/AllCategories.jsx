@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { useProducts } from "../../hooks";
+import Loader from "@/components/Loader";
 
 const AllCategories = () => {
-  const { data:products, isLoading, isError, error } = useProducts();
+  const { data: products, isLoading, isError, error } = useProducts();
   const [count, setCount] = useState(6);
 
   const handleProductCategories = () => {
     setCount((prev) => prev + 2);
   };
 
-  if (isLoading.state) {
-    return <p>{isLoading.message}</p>;
-  }
-
   if (isError) {
-    return <p>Error: {error?.message || "Something went wrong"}</p>;
+    return (
+      <p>Error: {error?.message || "Something went wrong in categories"}</p>
+    );
   }
 
   return (
@@ -28,17 +27,21 @@ const AllCategories = () => {
       </p>
 
       <div className="grid grid-cols-4  gap-y-8">
-        {products.slice(0, count).map((product) => (
-          <div
-            key={product._id}
-            className="w-[220px] 
+        {isLoading.state ? (
+          <Loader msg={isLoading.message} />
+        ) : (
+          products.slice(0, count).map((product) => (
+            <div
+              key={product._id}
+              className="w-[220px] 
         h-[80px] border-y-2 border-gray-300 shadow-md shadow-blue-400 rounded text-center  mx-auto p-4"
-          >
-            <h3 className="text-xl font-medium capitalize">
-              {product.category}
-            </h3>
-          </div>
-        ))}
+            >
+              <h3 className="text-xl font-medium capitalize">
+                {product.category}
+              </h3>
+            </div>
+          ))
+        )}
       </div>
 
       <div className="flex justify-center mt-12">

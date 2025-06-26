@@ -1,0 +1,26 @@
+
+.animated-input{
+  border-width: 2px;
+  border-right: 0;
+  border-style: solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, #e84118, #0097e6, #6eff58);
+  animation: gradientBorder 5s linear infinite;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+  background: white;
+}
+
+@keyframes gradientBorder {
+  0% {
+    border-image-source: linear-gradient(90deg, #f43f5e, #3b82f6, #e1b12c);
+  }
+  50% {
+    border-image-source: linear-gradient(90deg, #8854d0, #3b82f6,#fed330);
+  }
+  100% {
+    border-image-source: linear-gradient(90deg, #bb9713, #0fbcf9, #ff3f34);
+  }
+}

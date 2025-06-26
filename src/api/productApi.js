@@ -4,15 +4,18 @@ import axiosApi from "./axiosApi";
 
 export const getProducts =async()=>{
   
- const response = await axiosApi.get('/')
+ const response = await axiosApi.get('/products')
   return response?.data?.products;
 
 }
 
 export const getNewArrivalsProducts =async()=>{
- const response = await axiosApi.get('/new-arrivals')
+ const response = await axiosApi.get('/products/new-arrivals')
   return response?.data?.products;
 
 }
 
-getNewArrivalsProducts()
+export const getTopSalesProducts =async()=>{
+  const response = await axiosApi.get('/products/top-sales')
+    return response?.data?.products
+}

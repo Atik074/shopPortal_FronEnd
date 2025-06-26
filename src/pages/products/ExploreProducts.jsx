@@ -1,14 +1,15 @@
 import { useProducts } from "@/hooks";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
-const PopularProducts = () => {
-  const { data:products, isLoading, isError, error } = useProducts();
+import Loader from "@/components/Loader";
+
+
+
+const ExploreProducts = () => {
+  const { data: products, isLoading, isError, error } = useProducts();
   const [count, setCount] = useState(4);
 
-  if (isLoading.state) {
-    return <p>{isLoading.message}</p>;
-  }
-
+ 
   if (isError) {
     return <p>Error: {error?.message || "Something went wrong"}</p>;
   }
@@ -19,20 +20,25 @@ const PopularProducts = () => {
 
   return (
     <div>
-      <h2 className="text-red-500 text-3xl font-medium text-center mb-2">
-        Our Popular Fashion{" "}
+      <h2 className="text-red-500 text-3xl font-medium text-center mb-3">
+        Discover Your Look
       </h2>
-      <p className="text-[18px] text-gray-600 text-center mb-12">
-        Popular fashion is demandable everywhere to organised or to be smart
-        ownself
+      <p className="text-[18px] text-gray-600 text-center mb-12 mx-[16%]">
+       Discover the perfect blend of trend and elegance with our latest fashion collections.everyday essentials to statement pieces,  curated styles that speak your personality.
       </p>
 
       <div className="grid grid-cols-4   p-4 gap-5 ">
-        {products.slice(0, count).map((product) =><ProductCard 
-        key={product._id} 
-        product={product}
-       
-        />)}
+        {
+          isLoading.state ? 
+             <Loader msg={isLoading.message}/>
+              :
+
+           products.slice(0, count).map((product) => (
+          <ProductCard key={product._id} product={product}   isTopSales = {false} />
+
+        ))}
+        
+        
       </div>
       <div className="flex justify-center mt-12">
         <button
@@ -51,4 +57,4 @@ const PopularProducts = () => {
   );
 };
 
-export default PopularProducts;
+export default ExploreProducts;
