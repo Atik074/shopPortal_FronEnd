@@ -1,12 +1,10 @@
 const Navbar = () => {
 
-
-
     return (
-        <div >
+        <div className="px-8 py-4" >
            
             <div className="flex justify-between items-center">
-                 <h2 className="text-2xl font-medium">shopStore</h2>
+                 <a href="/" className="text-[28px] font-bold  text-sky-800 ">shopStore</a>
                 <ul className="flex items-center">
                     <li className="mx-6 text-[21px]">
                         <a href='/'>Woman</a>
