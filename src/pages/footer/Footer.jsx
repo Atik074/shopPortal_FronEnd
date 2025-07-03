@@ -11,7 +11,7 @@ const Footer = () => {
         <p className="text-sm">our own brand</p>
       </div>
       <div>
-          <h3 className="text-xl font-semibold mb-2">Quick Links</h3>
+          <h3 className="text-xl font-semibold mb-2 underline">Our Quick Links</h3>
           <ul className="space-y-1 text-gray-400 text-[18px] ">
             <li><a href="/" className="hover:underline">Home</a></li>
             <li><a href="/" className="hover:underline">Condition</a></li>

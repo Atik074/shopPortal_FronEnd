@@ -7,10 +7,15 @@ import ExploreProducts from "./pages/products/ExploreProducts";
 import NewArrivalProucts from "./pages/products/NewArrivalProucts";
 import TopSalesProducts from "./pages/products/TopSalesProducts";
 import Testimonial from "./pages/testimonial/Testimonial";
+import FavProductProvider from "./providers/FavProductProvider";
+import { ProductProvider } from "./providers/ProductProvider";
 
 function App() {
   return (
-    <div>
+    <ProductProvider>
+      <FavProductProvider>
+
+   
         <Navbar />
       <hr className="my-3 w-full" />
      <div className="main">
@@ -25,8 +30,8 @@ function App() {
    
       
       <Footer/>
-     
-    </div>
+        </FavProductProvider>
+    </ProductProvider>
   );
 }
 

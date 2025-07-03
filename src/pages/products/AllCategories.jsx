@@ -32,7 +32,7 @@ const AllCategories = () => {
         ) : (
           products.slice(0, count).map((product) => (
             <div
-              key={product._id}
+              key={product.id}
               className="w-[220px] 
         h-[80px] border-y-2 border-gray-300 shadow-md shadow-blue-400 rounded text-center  mx-auto p-4"
             >

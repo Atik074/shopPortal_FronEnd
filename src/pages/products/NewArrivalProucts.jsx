@@ -1,9 +1,21 @@
 import useNewArrivalsProducts from "@/hooks/useNewArrivalsProducts";
 import ProductCard from "./ProductCard";
 import Loader from "@/components/Loader";
+import { useCart, useFavCart } from "@/hooks";
+
 
 const NewArrivalProucts = () => {
   const { newProducts, isLoading, isError, error } = useNewArrivalsProducts();
+const { addToCart } = useCart()
+  const { isFav,  toggleFavItem} = useFavCart();
+
+
+
+
+
+
+
+
 
   if (isError) {
     return <p>Error: {error?.message || "New arrivals Products error"}</p>;
@@ -25,10 +37,13 @@ const NewArrivalProucts = () => {
              <Loader msg={isLoading.message}/> : (
           newProducts.map((newProduct) => (
             <ProductCard 
-            key={newProduct._id} 
-  
+            key={newProduct.id} 
             product={newProduct} 
              isTopSales = {false}
+            onAddToCart= { addToCart}
+              isFav={isFav}
+             onAddToFav={toggleFavItem}
+
             />
           ))
         )}

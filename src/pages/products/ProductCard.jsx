@@ -1,17 +1,14 @@
-import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
 
-const ProductCard = ({ product,isTopSales }) => {
-  const [addToFav , setAddToFav] = useState(false)
-
+const ProductCard = ({ 
+  product,isTopSales ,onAddToCart, isFav,onAddToFav
+}) => {
   const discountPerProduct = (product.price * 10/100)
 
-  const handleFavourite =()=>{
-       setAddToFav(!addToFav)
-  }
 
+ 
 
   return (
     <div className="relative border border-gray-700 shadow-md ">
@@ -38,9 +35,9 @@ const ProductCard = ({ product,isTopSales }) => {
           -{discountPerProduct}tk
         </p>}
        
-        <button onClick={handleFavourite} className="cursor-pointer">
+        <button onClick={()=>onAddToFav(product)} className="cursor-pointer">
           {
-            addToFav ? <FaHeart className="absolute top-5 right-3 text-pink-600" size={26} /> : <FaRegHeart className="absolute top-5 right-3 text-white" size={26} />
+             isFav(product.id)  ? <FaHeart className="absolute top-5 right-3 text-pink-600" size={26} /> : <FaRegHeart className="absolute top-5 right-3 text-white" size={26} />
           }
           
         </button>
@@ -65,7 +62,9 @@ const ProductCard = ({ product,isTopSales }) => {
           {product.description.slice(0, 50)}{" "}
         </p>
         <div className="flex justify-between items-center ">
-          <button className="bg-sky-800 text-white  text-[19px] rounded  mb-5 cursor-pointer px-3 py-2 hover:bg-amber-600 duration-300 ease-in-out transition-colors">
+          <button
+            onClick={()=>onAddToCart(product)}
+           className="bg-sky-800 text-white  text-[19px] rounded  mb-5 cursor-pointer px-3 py-2 hover:bg-amber-600 duration-300 ease-in-out transition-colors">
             Add to cart
           </button>
           <button
