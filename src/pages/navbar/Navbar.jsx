@@ -12,11 +12,13 @@ const Navbar = () => {
    const [showModal , setShowModal] = useState(false)
 
 
+
 //modal show  or hide
    const handleModal =(e)=>{
          e.preventDefault()
       setShowModal(!showModal)
    }
+
 
 
 
@@ -74,7 +76,10 @@ const Navbar = () => {
              <div>
               { 
                showModal && <Modal 
-               onClose={handleModal}/> 
+               onClose={handleModal}
+              
+             
+               /> 
               }
               
             </div>

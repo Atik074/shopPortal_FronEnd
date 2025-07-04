@@ -1,72 +1,99 @@
 import { useCart } from "@/hooks";
-import { useState } from "react";
-
 import { FaMinus, FaPlus } from "react-icons/fa";
 
+
+
 const CartModal = () => {
-    const { cartProducts}= useCart()
-    const [productIncrease, setProductIncrease] = useState(0)
+  const { cartProducts, increaseQuantity, decreaseQuantity , removeFromCart } = useCart();
 
+
+  //handle Total Price In to Cart
+  const handleTotalPrice = cartProducts.reduce((total,product)=>{
+        return total + product.price * product.quantity
+  },0)
   
 
-  
-    return (
-        <div className="p-2">
-            <h2>Order</h2>
-            <hr/>
-            {
-              cartProducts.length === 0 ? (
+  return (
+    <div className="px-3 w-[600px]">
+      <h2 className="text-xl font-medium"> My Cart Products</h2>
+    
+      <div className="my-5">
+        {cartProducts.length === 0 ? (
           <p className="text-[19px] text-red-500 m-4  rounded">
             You haven’t added any products yet
-          </p> )
-          : (
-              
-             cartProducts.map(product =>(
-             <li key={product.id} className="list-none">
-                <div className="flex gap-3">
-                     <img
+          </p>
+        ) : (
+          <table className="w-full border-collapse ">
+            <thead>
+              <tr className="border-b-2 text-[18px] m-3">
+                <th className="text-start ">Image</th>
+                <th className="text-start">Product</th>
+                <th className="text-center">Price</th>
+                <th className="text-center">Quantity</th>
+                <th className="text-center">Actions</th>
+                <th className="text-center">Total</th>
+                <th className="text-right">Remove</th>
+
+              </tr>
+             
+            </thead>
+
+            <tbody >
+              {cartProducts.map((product) => (
+                <tr key={product.id}  >
+                   <td >
+                      <img
                     src={product?.images[0]?.url}
-                    className="w-12 rounded"
+                    className="w-12 rounded my-2"
                     alt="picture"
-                  /> 
-                  <h4
-                    className="text-[17px]  truncate max-w-[150px] font-semibold"
-                    title={product.name}
+                  />
+                   </td>
+                  <td className="text-[18px] truncate max-w-[100px]">{product.name}</td>
+                  <td className="text-center text-[16px]">{product.price}</td>
+                  <td  className="text-center text-[16px]">{product.quantity}</td>
+                  <td className="text-center">
+
+                  <button
+                    onClick={() => decreaseQuantity(product.id)}
+                    disabled={product.quantity === 1}
+                    className="text-white p-1 text-[14px] rounded cursor-pointer border  disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {product.name}
-                  </h4>
-
-                </div>
-                <div className="flex justify-center">
-                     <button 
-                   
-                     onClick={()=>{
-
-                        if(productIncrease > 0){
-                     setProductIncrease(productIncrease - 1)
-                      }
-
-                     }}
-                     disabled={productIncrease === 0}
-                      className="text-white border py-[2px] px-[6px] rounded cursor-pointer  disabled:opacity-50 disabled:cursor-not-allowed">
                     <FaMinus />
-               </button>
-                    <p className="tex-xl mx-3">{productIncrease}</p>
-                 <button 
-                   onClick={()=>setProductIncrease(productIncrease + 1)}
-                  className="text-white border py-[2px] px-[6px] rounded cursor-pointer"
-                         >
-                       <FaPlus />
-   
                   </button>
-                </div>
-                  
-             </li>))   
-          )
 
-            }
-        </div>
-    );
+                  <button
+                    onClick={() => increaseQuantity(product.id)}
+                    disabled={product.stock === 1}
+                    className="text-white text-[14px]  p-1 rounded mx-3 cursor-pointer border  disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                   <FaPlus/>
+                  </button>
+                      </td>
+                  <td className="text-right text-[16px]">{product.price * product.quantity}</td>
+                  <td className="text-center text-xl font-bold ">
+                    <button className="cursor-pointer" onClick={()=>removeFromCart(product.id)}> X</button>
+
+                
+                  </td>
+                </tr>
+              ))}
+
+        
+            </tbody>
+            
+          </table>
+        )}
+
+<div className="flex flex-col ">
+   <p className="text-xl text-end mb-4 mt-6 font-semibold text-amber-400">Total Price : {handleTotalPrice}tk</p>
+          <button className="
+          px-3 py-2 cursor-pointer border-[2px] border-white text-[19px] font-bold rounded bg-sky-600 hover:bg-sky-700">Proceed to Checkout</button>
+
+</div>
+       
+      </div>
+    </div>
+  );
 };
 
 export default CartModal;

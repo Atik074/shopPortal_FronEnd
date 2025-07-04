@@ -42,6 +42,28 @@ export const ProductProvider = ({ children }) => {
   };
 
 
+  /// increase product quantity from cart
+  const increaseQuantity = (id) => {
+
+     setCartProducts(prevCart =>
+      prevCart.map(item =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      ) 
+    );
+  };
+
+  //decrease product quantity from cart
+const decreaseQuantity = (id) => {
+  setCartProducts(prevCart => {
+    return prevCart.map(item =>
+      item.id === id && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+  });
+};
+
+
   // Clear all products from cart
   const clearCart = () => setCartProducts([]);
 
@@ -53,6 +75,8 @@ export const ProductProvider = ({ children }) => {
         setCartProducts,
         addToCart,
         removeFromCart ,
+        increaseQuantity ,
+        decreaseQuantity ,
         clearCart
       }}
     >

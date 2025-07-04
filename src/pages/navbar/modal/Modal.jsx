@@ -2,6 +2,7 @@ import { RxCross1 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import FavModal from "./FavModal";
 import CartModal from "./CartModal";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 const Modal = ({ onClose }) => {
   const [show, setShow] = useState(false);
@@ -12,6 +13,7 @@ const Modal = ({ onClose }) => {
     const transitionTimer = setTimeout(() => setShow(true), 50);
     return () => clearTimeout(transitionTimer );
   }, []);
+
 
   return (
     <div className="fixed z-50 flex justify-end right-48 top-16">
@@ -25,9 +27,25 @@ const Modal = ({ onClose }) => {
         <h2 className="text-xl mb-2 text-center underline">
           Favourite Products
         </h2>
+{/* ///////////////////////////// */}
 
-           {/* <FavModal/> */}
-           <CartModal/>
+
+      <CartModal/>
+
+
+
+
+
+
+
+
+
+
+{/* ///////////////////////////// */}
+
+         
+       
+
 
         <button
           onClick={onClose}
