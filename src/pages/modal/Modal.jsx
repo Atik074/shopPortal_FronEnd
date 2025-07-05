@@ -1,8 +1,7 @@
 import { RxCross1 } from "react-icons/rx";
 import { useEffect, useState } from "react";
-import FavModal from "./FavModal";
 import CartModal from "./CartModal";
-import { FaMinus, FaPlus } from "react-icons/fa";
+
 
 const Modal = ({ onClose }) => {
   const [show, setShow] = useState(false);
@@ -30,7 +29,7 @@ const Modal = ({ onClose }) => {
 {/* ///////////////////////////// */}
 
 
-      <CartModal/>
+      <CartModal setShow={setShow}/>
 
 
 

@@ -2,7 +2,7 @@ import { useCart, useFavCart } from "@/hooks";
 import { useState } from "react";
 import {  BsCart2 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
-import Modal from "./modal/Modal";
+import Modal from "../modal/Modal";
 
  
 
@@ -85,7 +85,7 @@ const Navbar = () => {
             </div>
              
             
-           
+             <hr className="my-3 w-full" />
         </div>
     );
 };
