@@ -1,10 +1,13 @@
 import { RxCross1 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import CartModal from "./CartModal";
+import FavModal from "./FavModal";
 
 
-const Modal = ({ onClose }) => {
+
+const Modal = ({ onClose, showFavModal,showCartModal }) => {
   const [show, setShow] = useState(false);
+ 
 
 
   // for animation modal opening
@@ -23,22 +26,18 @@ const Modal = ({ onClose }) => {
             : "opacity-0 -translate-y-2 scale-95"
         }`}
       >
-        <h2 className="text-xl mb-2 text-center underline">
-          Favourite Products
-        </h2>
+        
+         
 {/* ///////////////////////////// */}
 
-
-      <CartModal setShow={setShow}/>
-
-
+     { showFavModal === true ?  <FavModal/> : "" }
+      {showCartModal=== true ?  <CartModal/> : ""  }
 
 
-
-
-
-
-
+      
+        
+     
+     
 
 {/* ///////////////////////////// */}
 

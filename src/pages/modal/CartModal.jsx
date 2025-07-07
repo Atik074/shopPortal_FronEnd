@@ -13,11 +13,12 @@ const CartModal = ({setShow}) => {
 
   return (
     <div className="px-3 w-[600px]">
-      <h2 className="text-xl font-medium"> My Cart Products</h2>
-
+     <h2 className="text-xl mb-2 text-center underline">
+          My Cart Products  
+        </h2>
       <div className="my-5">
         {cartProducts.length === 0 ? (
-          <p className="text-[19px] text-red-500 m-4  rounded">
+          <p className="text-[20px] text-red-500 m-4  rounded">
             You haven’t added any products yet
           </p>
         ) : (
