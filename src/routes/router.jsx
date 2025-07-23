@@ -4,6 +4,8 @@ import Home from "@/home/Home";
 import NotFound from "@/pages/NotFound";
 import { createBrowserRouter } from "react-router-dom";
 import Checkout from "@/pages/checkout/Checkout";
+import Login from "@/pages/auth/Login";
+import Register from "@/pages/auth/Register";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
         element:<Checkout/>
       }
     ],
+  },
+  {
+    path: '/login',
+    element: <Login/>,
+  },
+  {
+    path: '/register',
+    element: <Register/>,
   },
   {
     path: '*',

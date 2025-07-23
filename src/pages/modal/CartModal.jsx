@@ -16,9 +16,9 @@ const CartModal = ({setShow}) => {
      <h2 className="text-xl mb-2 text-center underline">
           My Cart Products  
         </h2>
-      <div className="my-5">
+      <div className="my-5 ">
         {cartProducts.length === 0 ? (
-          <p className="text-[20px] text-red-500 m-4  rounded">
+          <p className="text-[20px] text-center text-red-500 m-4  rounded">
             You haven’t added any products yet
           </p>
         ) : (
