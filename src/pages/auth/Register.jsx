@@ -2,10 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Divider from "@/components/Divider";
 import SocialLogin from "./SocialLogin";
-import { useMutation } from "@tanstack/react-query";
-import { createNewUser } from "@/api/authApi";
-import {  useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import useRegister from "@/hooks/useRegister";
 
 const Register = () => {
   const {
@@ -14,42 +11,18 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-
-const navigate = useNavigate()
-
-    const mutation = useMutation({
-      mutationKey:["register"],
-      mutationFn:createNewUser ,
-      onSuccess:(data)=>{
-        localStorage.setItem("token", data.token)
-
-        Swal.fire({
-         icon: "success",
-          title: "Registration Successful",
-          text: `Welcome ${data.user.name}!`,
-   
-});
-       navigate("/login")
-      } ,
-
-      onError:(error)=>{
-  Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error?.response?.data?.message || 'Something went wrong in register!',
-      });
-      }
-    })
+ const mutation = useRegister()
 
 
-  // check password for confirm 
+  // live check password for confirm 
   const password = watch("password", "");
 
-
+  
+//handle submit
   const onSubmit = (data) => {
     const { name, email, password, role } = data;
     mutation.mutate({ name, email, password, role })
-        console.log("Form Data:", data);
+      
    
   };
 

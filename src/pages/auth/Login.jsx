@@ -1,6 +1,7 @@
 import Divider from "@/components/Divider";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
+import useLogin from "@/hooks/useLogin";
 
 const Login = () => {
   const {
@@ -8,12 +9,15 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const mutation = useLogin();
 
-
+  
+  // handle from submit
   const onSubmit = (data) => {
-    console.log(data);
-  };
+    const { email, password } = data;
 
+    mutation.mutate({ email, password });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 ">
@@ -36,77 +40,74 @@ const Login = () => {
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
             <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-600 mb-1"
-        >
-          Email Address
-        </label>
-        <input
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value:
-                /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "Invalid email address",
-            },
-          })}
-          className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
-            errors.email
-              ? "border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:ring-amber-500"
-          }`}
-          type="email"
-          id="email"
-          placeholder="email@example.com"
-        />
-        {errors.email && (
-          <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-        )}
-      </div>
-
-            {/* input component */}
-            {/* <Input htmlFor="radio mastan"
-        title={"text"} 
-        placeholder="textub"/> */}
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600 mb-1"
+              >
+                Email Address
+              </label>
+              <input
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                    message: "Invalid email address",
+                  },
+                })}
+                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
+                  errors.email
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-amber-500"
+                }`}
+                type="email"
+                id="email"
+                placeholder="email@example.com"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
 
             {/* Password */}
-           <div>
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium text-gray-600 mb-1"
-        >
-          Password
-        </label>
-        <input
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-          type="password"
-          id="password"
-          placeholder="••••••••"
-          className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
-            errors.password
-              ? "border-red-500 focus:ring-red-500"
-              : "border-gray-300 focus:ring-amber-500"
-          }`}
-        />
-        {
-        errors.password && (
-          <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-        )}
-      </div>
-
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-600 mb-1"
+              >
+                Password
+              </label>
+              <input
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+                type="password"
+                id="password"
+                placeholder="••••••••"
+                className={`w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 ${
+                  errors.password
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-gray-300 focus:ring-amber-500"
+                }`}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
 
             <button
               type="submit"
+              disabled={mutation.isLoading}
               className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-[10px] rounded-lg transition duration-300 text-[18px]"
             >
-              Sign In
+              {mutation?.isLoading ? "logging..." : "Login"}
             </button>
 
             <Divider />
