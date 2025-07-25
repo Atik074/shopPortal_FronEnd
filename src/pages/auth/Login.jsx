@@ -1,7 +1,8 @@
 import Divider from "@/components/Divider";
 import SocialLogin from "./SocialLogin";
 import { useForm } from "react-hook-form";
-import useLogin from "@/hooks/useLogin";
+import { useLogin } from "@/hooks";
+
 
 const Login = () => {
   const {

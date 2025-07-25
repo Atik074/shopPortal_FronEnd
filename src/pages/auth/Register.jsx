@@ -2,7 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Divider from "@/components/Divider";
 import SocialLogin from "./SocialLogin";
-import useRegister from "@/hooks/useRegister";
+import { useRegister } from "@/hooks";
+
 
 const Register = () => {
   const {

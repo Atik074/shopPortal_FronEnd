@@ -3,8 +3,12 @@ import { useState } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import Modal from "../modal/Modal";
+import { Link } from "react-router-dom";
+import UseAvater from "@/components/UseAvater";
 
 const Navbar = () => {
+  const user = JSON.parse(localStorage.getItem("user"))
+
   const { cartProducts } = useCart();
   const { favItems } = useFavCart();
   const [showModal, setShowModal] = useState(false);
@@ -79,14 +83,14 @@ const Navbar = () => {
             </span>
           )}
 
-          {/* {
-                        user ? <li className="mx-6 text-[21px]">
-                        <a href='#'>LogOut</a></li> : <li className="mx-6 text-[21px]">
-                        <a href='#'>Login</a></li>
-                    } */}
-          <li className="mx-6 text-[21px]">
-            <a href="/login">Login</a>
-          </li>
+          {   user ?  <UseAvater user={user}/>
+               
+                          : 
+                      <li className="x-6 text-[21px] bg-amber-500 px-3 py-1 rounded-md hover:bg-amber-600 hover:text-white transition-all">
+                       <Link to='/login'>Login</Link>
+                        </li>
+                    }
+         
         </ul>
       </div>
 

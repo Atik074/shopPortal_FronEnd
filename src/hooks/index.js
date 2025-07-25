@@ -3,6 +3,8 @@ import useNewArrivalsProducts from "./useNewArrivalsProducts"
  import useTopSalesProducts from "./useTopSalesProducts"
  import useCart from "./useCart"
  import useFavCart from "./useFavCart"
+ import useLogin from "./useLogin"
+ import useRegister from "./useRegister"
 
 
 export {
@@ -10,6 +12,8 @@ export {
   useNewArrivalsProducts ,
   useTopSalesProducts ,
   useCart ,
-  useFavCart
+  useFavCart ,
+  useLogin,
+  useRegister
   
 }
