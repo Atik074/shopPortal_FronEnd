@@ -6,20 +6,30 @@ import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
 import UseAvater from "@/components/UseAvater";
 
+
+
+
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user"))
 
   const { cartProducts } = useCart();
   const { favItems } = useFavCart();
   const [showModal, setShowModal] = useState(false);
-  const [showFavModal, setShowFavModal] = useState(false);
-  const [showCartModal, setShowCartModal] = useState(false);
+  const [favModal, setFavModal] = useState(false);
+  const [cartModal,setCartModal] = useState(false);
+  const [userModal, setUserModal] = useState(false);
+
 
   //modal show  or hide
   const handleModal = (e) => {
     e.preventDefault();
     setShowModal(!showModal);
+   
   };
+
+  
+
+
 
   return (
     <div className="px-8 py-4">
@@ -46,8 +56,9 @@ const Navbar = () => {
               href="#"
               onClick={(e) => {
                 handleModal(e);
-                setShowFavModal(true);
-                setShowCartModal(false);
+                setFavModal(true);
+               setCartModal(false);
+                setUserModal(false)
               }}
             >
               <FaRegHeart />
@@ -62,13 +73,14 @@ const Navbar = () => {
               </span>
             )}
           </li>
-          <li className="mx-6 text-[25px] ">
+          <li className="mx-6 text-[25px]">
             <a
               href="#"
               onClick={(e) => {
                 handleModal(e);
-                setShowCartModal(true);
-                setShowFavModal(false);
+               setCartModal(true);
+                setFavModal(false);
+                setUserModal(false)
               }}
             >
               <BsCart2 />
@@ -83,7 +95,27 @@ const Navbar = () => {
             </span>
           )}
 
-          {   user ?  <UseAvater user={user}/>
+          {   user ? 
+            <div className="relative">
+
+
+              <li className="mx-6 text-[25px] w-12 h-12  ">
+            <a
+           
+              href="#"
+              onClick={(e) => {
+                handleModal(e);
+               setUserModal(true);
+               setFavModal(false);
+               setCartModal(false)
+              }}
+            >
+             <UseAvater/>
+            </a>
+          </li>
+                
+              </div>
+         
                
                           : 
                       <li className="x-6 text-[21px] bg-amber-500 px-3 py-1 rounded-md hover:bg-amber-600 hover:text-white transition-all">
@@ -98,8 +130,9 @@ const Navbar = () => {
         {showModal && (
           <Modal
             onClose={handleModal}
-            showFavModal={showFavModal}
-            showCartModal={showCartModal}
+            favModal={favModal}
+            cartModal={cartModal}
+            userModal={userModal}
           />
         )}
       </div>

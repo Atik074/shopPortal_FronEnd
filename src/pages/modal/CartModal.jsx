@@ -12,16 +12,19 @@ const CartModal = ({setShow}) => {
   }, 0);
 
   return (
-    <div className="px-3 w-[600px]">
-     <h2 className="text-xl mb-2 text-center underline">
-          My Cart Products  
-        </h2>
-      <div className="my-5 ">
+    <div className="px-3">
+     
+      <div>
         {cartProducts.length === 0 ? (
-          <p className="text-[20px] text-center text-red-500 m-4  rounded">
+          <p className="text-[20px] text-center text-white mt-8  rounded font-semibold">
             You haven’t added any products yet
           </p>
         ) : (
+          <div className="w-[600px]">
+         
+          <h2 className="text-2xl mb-4 text-center underline ">
+          My Cart Products  
+        </h2>
           <table className="w-full border-collapse ">
             <thead>
               <tr className="border-b-2 text-[18px] m-3">
@@ -84,7 +87,7 @@ const CartModal = ({setShow}) => {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> </div>
         )}
 
         {cartProducts.length >= 1 && (

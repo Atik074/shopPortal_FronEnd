@@ -12,16 +12,17 @@ const FavModal = () => {
   };
 
   return (
-    <div className="">
-      <h2 className="text-xl mb-2 text-center underline">
-          My Favourite Products  
-        </h2>
+    <div>
+     
       {favItems.length === 0 ? (
-        <p className="text-[20px] text-red-500 mt-10 font-medium rounded">
+        <p className="text-[20px] text-white mt-10 font-medium rounded">
           You haven’t added any products yet
         </p>
       ) : (
-        <ul className="mt-10">
+        <ul className="mt-2">
+             <h2 className="text-xl mb-2 text-center underline">
+          My Favourite Products  
+        </h2>
           {favItems.map((item) => (
             <li key={item.id}>
               <div className="flex justify-between items-center gap-2 w-[500px] mb-2">
