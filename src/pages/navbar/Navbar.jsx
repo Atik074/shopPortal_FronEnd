@@ -12,6 +12,7 @@ import UseAvater from "@/components/UseAvater";
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user"))
 
+
   const { cartProducts } = useCart();
   const { favItems } = useFavCart();
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +34,7 @@ const Navbar = () => {
 
   return (
     <div className="px-8 py-4">
+      
       <div className="flex justify-between  items-center">
         <a href="/" className="text-[28px] font-bold  text-sky-800 ">
           shopStore
@@ -95,11 +97,11 @@ const Navbar = () => {
             </span>
           )}
 
-          {   user ? 
+          {  user ? 
             <div className="relative">
 
 
-              <li className="mx-6 text-[25px] w-12 h-12  ">
+              <li className="mx-6 text-[25px] w-12 h-12">
             <a
            
               href="#"
@@ -136,7 +138,7 @@ const Navbar = () => {
           />
         )}
       </div>
-
+      
       <hr className="my-3 w-full" />
     </div>
   );

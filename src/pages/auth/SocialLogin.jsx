@@ -1,9 +1,22 @@
+import { googleLogin } from "@/api/authApi";
+import { useNavigate } from "react-router-dom";
+
 const SocialLogin = () => {
+  const navigate = useNavigate()
+
+   // handle google login
+   const handleGoogleLogin =async()=>{
+       
+        await googleLogin()
+        navigate('/')
+
+   }
+
     return (
 <button
   type="button"
-
-  className="w-full relative overflow-hidden flex items-center justify-center gap-3 px-4 py-[10px] rounded-lg border border-gray-300 bg-white hover:bg-blue-700 hover:text-white text-gray-800 font-medium transition-all duration-500"
+     onClick={handleGoogleLogin}
+  className="w-full relative overflow-hidden flex items-center justify-center gap-3 px-4 py-[10px] rounded-lg border border-gray-300 bg-white hover:bg-blue-700 hover:text-white text-gray-800 font-medium transition-all duration-500 cursor-pointer"
   
 >
   <img

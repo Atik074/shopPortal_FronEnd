@@ -23,13 +23,11 @@ const UserModal = () => {
         <div className="my-3 w-18 h-18 mx-auto">
           <UseAvater />  
         </div>
-         <p className="text-center text-sm  underline mb-1">{user?.name} </p>
+         <p className="text-center text-md  underline mb-1">{user?.name} </p>
          <h3 className="text-sm text-center">{user?.email} </h3> 
-            
-         
      
         <div className="mt-8 flex flex-col">
-        <Link to="/"  className="text-[18px] hover:underline  mb-2">My Account</Link>
+        <Link to="/"  className="text-[18px] hover:underline  mb-2">My Order</Link>
         <Link to="/" className="text-[18px] hover:underline  mb-2">Dashboard</Link>
         <Link to="/" className="text-[18px] hover:underline  mb-2">Users</Link>
         <Link to="/" className="text-[18px] hover:underline  mb-2">My Account</Link>

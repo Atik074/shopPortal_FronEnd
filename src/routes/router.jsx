@@ -6,6 +6,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Checkout from "@/pages/checkout/Checkout";
 import Login from "@/pages/auth/Login";
 import Register from "@/pages/auth/Register";
+import AdminDashboard from "@/pages/dashboard/admin/AdminDashboard";
+import AdminProtectedRoute from "./AdminProtectedRoute";
+import AuthProtectedRoute from "./AuthProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +23,19 @@ const router = createBrowserRouter([
       {
         path:'checkout',
         element:<Checkout/>
-      }
+      },
+      {
+        path:'dashboard',
+        element:<AuthProtectedRoute>
+               <AdminDashboard/>
+        </AuthProtectedRoute>  
+      },
+      {
+        path:'admin-dashboard',
+        element:<AdminProtectedRoute>
+               <AdminDashboard/>
+        </AdminProtectedRoute>  
+      },
     ],
   },
   {

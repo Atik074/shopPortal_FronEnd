@@ -8,15 +8,16 @@ const UseAvater = () => {
   return (
    
         <Avatar className="w-full h-full rounded-full">
-          {user?.image && (
+          {
+          user?.avater ? (
             <AvatarImage
               className="border-2 border-amber-100"
-              src={user?.image}
-              alt={user?.name || "User"}
+              src={user?.avater}
+              alt={user?.avater || "User"}
             />
-          )}
-
-          <AvatarFallback className="bg-amber-500 text-white font-semibold ">
+          ) 
+           : 
+            <AvatarFallback className="bg-amber-500 text-white font-semibold ">
             {user?.name
               ? user.name
                   .split(" ")
@@ -26,6 +27,10 @@ const UseAvater = () => {
                   .toUpperCase()
               : "U"}
           </AvatarFallback>
+        
+        }
+
+          
         </Avatar>
    
    

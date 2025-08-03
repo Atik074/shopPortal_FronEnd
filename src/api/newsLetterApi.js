@@ -1,3 +1,4 @@
+import handleError from "@/lib/handleError";
 import axiosApi from "./axiosApi";
 
 export const createSubscriber = async (email) => {
@@ -17,6 +18,6 @@ export const checkedSubscriber =async (email)=>{
         const res = await axiosApi.get(`/newsletter/check?email=${email}`)
            return  res.data.subscribed
     }catch(err){
-       throw new Error(err)
+      handleError(err , "error in cheack subscriber")
     }
 }

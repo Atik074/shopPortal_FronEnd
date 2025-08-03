@@ -1,0 +1,8 @@
+const AuthProtectedRoute = ({children}) => {
+    const token =JSON.parse(localStorage.getItem("token"))
+
+    if(!token) return <Navigate to="/login" />;
+    return children
+};
+
+export default AuthProtectedRoute;
