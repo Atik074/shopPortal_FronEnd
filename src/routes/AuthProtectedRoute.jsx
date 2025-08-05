@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+
 const AuthProtectedRoute = ({children}) => {
     const token =JSON.parse(localStorage.getItem("token"))
 

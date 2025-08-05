@@ -9,8 +9,7 @@ const useRegister = ()=>{
     return useMutation({
       mutationFn:createNewUser ,
       onSuccess:(data)=>{
-        localStorage.setItem("token", data.token)
-
+      
         Swal.fire({
          icon: "success",
           title: "Registration Successful",

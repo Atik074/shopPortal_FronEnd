@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 
 const UseAvater = () => {
-  const user = JSON.parse(localStorage.getItem("user"))
+  const {user} = JSON.parse(localStorage.getItem("auth"))
 
   return (
    
@@ -12,8 +12,8 @@ const UseAvater = () => {
           user?.avater ? (
             <AvatarImage
               className="border-2 border-amber-100"
-              src={user?.avater}
-              alt={user?.avater || "User"}
+              src={ user?.avater}
+              alt={ user?.avater || "User"}
             />
           ) 
            : 

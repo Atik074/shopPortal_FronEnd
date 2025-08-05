@@ -9,6 +9,7 @@ import Register from "@/pages/auth/Register";
 import AdminDashboard from "@/pages/dashboard/admin/AdminDashboard";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import AuthProtectedRoute from "./AuthProtectedRoute";
+import Dashboard from "@/pages/dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -27,12 +28,12 @@ const router = createBrowserRouter([
       {
         path:'dashboard',
         element:<AuthProtectedRoute>
-               <AdminDashboard/>
+               <Dashboard/>
         </AuthProtectedRoute>  
       },
       {
         path:'admin-dashboard',
-        element:<AdminProtectedRoute>
+        element: <AdminProtectedRoute>
                <AdminDashboard/>
         </AdminProtectedRoute>  
       },

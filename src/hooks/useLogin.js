@@ -11,9 +11,6 @@ const useLogin =()=>{
     return useMutation({
       mutationFn:loggedInUser,
       onSuccess:(data)=>{
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("user",  JSON.stringify(data?.user) )
-       
         Swal.fire({
          icon: "success",
           title: "Login Successful",

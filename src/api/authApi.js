@@ -1,59 +1,46 @@
 import { app } from "@/config/firease.config";
-import axiosApi from "./axiosApi"
+import axiosApi from "./axiosApi";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import handleError from "@/lib/handleError";
-import { replaceMongoIdObj } from "@/lib/idConverter";
+import { saveAuthToLocalStorage } from "@/lib/saveAuthToLocalStorage";
 
+export const createNewUser = async (userData) => {
+  try {
+    const response = await axiosApi.post("/auth/register", userData);
 
-export const createNewUser =async(userData)=>{
-   try{
-        const response =  await axiosApi.post("/auth/register" , userData )
-     
-   return response.data ;
-   }catch(err){
-         handleError(err ,"create new user failed")
-   }
- 
-
-}
+    return response.data;
+  } catch (err) {
+    handleError(err, "create new user failed");
+  }
+};
 // handle custom login
-export const loggedInUser =async(userData)=>{
-   try{
-        const response =  await axiosApi.post("/auth/login" ,
-  userData)
-   
-   return response.data ;
+export const loggedInUser = async (userData) => {
+  try {
+    const response = await axiosApi.post("/auth/login", userData);
 
-   }catch(err){
-    handleError(err ,"user failed to logged in ")
-   }
-
-
-}
+    saveAuthToLocalStorage(response.data.user, response.data.token);
+    return response.data;
+  } catch (err) {
+    handleError(err, "user failed to logged in ");
+  }
+};
 
 // handle login by google
-export const googleLogin =async()=>{
-   const auth = getAuth(app);
+export const googleLogin = async () => {
+  const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
-    
-   try{
-   const result = await signInWithPopup(auth ,provider)
-   const user = result.user
-    
-      const token =  await user.getIdToken()
-      const response = await axiosApi.post("/auth/google-login",{token})
 
-        const userInfo = replaceMongoIdObj(response.data.user)
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
-       localStorage.setItem("token", JSON.stringify(response.data.token));
-       
-       localStorage.setItem("user", JSON.stringify(userInfo))
-        
-       return userInfo ;
-   
-   }catch(err){
-       handleError(err ,"google login failed")
-      
-   }
- 
-}
+    const token = await user.getIdToken();
+    const response = await axiosApi.post("/auth/google-login", { token });
+
+    saveAuthToLocalStorage(response.data.user, response.data.token);
+
+    return response.data.user;
+  } catch (err) {
+    handleError(err, "google login failed");
+  }
+};

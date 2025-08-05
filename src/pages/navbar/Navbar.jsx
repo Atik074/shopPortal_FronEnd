@@ -10,7 +10,8 @@ import UseAvater from "@/components/UseAvater";
 
 
 const Navbar = () => {
-  const user = JSON.parse(localStorage.getItem("user"))
+  const {user} = JSON.parse(localStorage.getItem("auth"))
+ 
 
 
   const { cartProducts } = useCart();
