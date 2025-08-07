@@ -15,13 +15,10 @@ const useNewArrivalsProducts = () => {
 
 
      return {
-         newProducts: data, 
-        isLoading:{
-             state:isLoading ,
-             message:isLoading ? "New Arrival Products  is Loading..." :" "
-        },
-        isError,
-        error
+      newProducts : data, 
+      isLoading,
+      isError,
+     error,
      }
 };
 

@@ -1,4 +1,4 @@
-import handleError from "@/lib/handleError";
+import ErrorHandler from "@/lib/ErrorHandler";
 import axiosApi from "./axiosApi";
 
 export const getAllAdmin = async () => {
@@ -6,10 +6,9 @@ export const getAllAdmin = async () => {
     const response = await axiosApi.get("/admin");
     return response.data;
   } catch (err) {
-    handleError(err, "Failed to fetch  All Admin");
+    ErrorHandler(err, "Failed to fetch  All Admin");
   }
 };
-
 
 // admin can make from user to admin
 export const makeAdmin = async (id) => {
@@ -17,6 +16,6 @@ export const makeAdmin = async (id) => {
     const response = await axiosApi.put(`/admin/make-admin/:${id}`);
     return response.data;
   } catch (err) {
-    handleError(err, "Failed to fetch make admin");
+    ErrorHandler(err, "Failed to fetch make admin");
   }
 };

@@ -10,7 +10,7 @@ import UseAvater from "@/components/UseAvater";
 
 
 const Navbar = () => {
-  const {user} = JSON.parse(localStorage.getItem("auth"))
+  const auth = JSON.parse(localStorage.getItem("auth" ))
  
 
 
@@ -98,7 +98,7 @@ const Navbar = () => {
             </span>
           )}
 
-          {  user ? 
+          {  auth?.user ? 
             <div className="relative">
 
 

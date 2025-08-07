@@ -1,20 +1,21 @@
 import useTopSalesProducts from "@/hooks/useTopSalesProducts";
 import ProductCard from "./ProductCard";
 import Loader from "@/components/Loader";
-import { useCart, useFavCart } from "@/hooks";
+import { useAddToCart,  useFavCart } from "@/hooks";
+import ErrorMsg from "@/components/ErrorMsg";
 
 
 const TopSalesProducts = () => {
-  const { data: TopSalesProducts,  isLoading, isError, error,
+  const {  TopSalesProducts,  isLoading, isError, error,
   } = useTopSalesProducts();
-  const {addToCart} = useCart()
+   const { addToCart } = useAddToCart();
     const { isFav,  toggleFavItem} = useFavCart();
 
 
 
 
-  if (isError) {
-    return <p>Error: {error?.message || "Top sales Product data is error"}</p>;
+   if (isError) {
+    return <ErrorMsg msg={error?.message}/>
   }
 
   return (

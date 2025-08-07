@@ -1,14 +1,15 @@
+
 import { replaceMongoIdArray } from "@/lib/idConverter";
 import axiosApi from "./axiosApi";
-import handleError from "@/lib/handleError";
+import ErrorHandler from "@/lib/ErrorHandler";
 
 export const getProducts = async () => {
   try {
     const response = await axiosApi.get("/products");
     return replaceMongoIdArray(response?.data?.products);
   } catch (err) {
-    handleError(err, "error in get products  fetch failed");
-     return []
+  
+    ErrorHandler(err, "fetch failed in get products");
   }
 };
 
@@ -18,8 +19,7 @@ export const getNewArrivalsProducts = async () => {
 
     return replaceMongoIdArray(response?.data?.products);
   } catch (err) {
-    handleError(err, "error in new arival products fetched failed");
-     return []
+    ErrorHandler(err, "fetched failed in new arival products fetched failed");
   }
 };
 
@@ -28,7 +28,6 @@ export const getTopSalesProducts = async () => {
     const response = await axiosApi.get("/products/top-sales");
     return replaceMongoIdArray(response?.data?.products);
   } catch (err) {
-    handleError(err, "error in top sales products fetched failed");
-     return [] ;
+    ErrorHandler(err, "fetched failed in top sales products ");
   }
 };

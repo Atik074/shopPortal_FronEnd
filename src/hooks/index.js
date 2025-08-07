@@ -5,6 +5,7 @@ import useNewArrivalsProducts from "./useNewArrivalsProducts"
  import useFavCart from "./useFavCart"
  import useLogin from "./useLogin"
  import useRegister from "./useRegister"
+ import useAddToCart from "./useAddToCart"
 
 
 export {
@@ -14,6 +15,7 @@ export {
   useCart ,
   useFavCart ,
   useLogin,
-  useRegister
+  useRegister ,
+  useAddToCart
   
 }

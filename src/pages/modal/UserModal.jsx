@@ -3,7 +3,7 @@ import UseAvater from "@/components/UseAvater";
 import { Link, useNavigate } from "react-router-dom";
 
 const UserModal = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const {user} = JSON.parse(localStorage.getItem("auth"));
     const navigate = useNavigate()
 
 
@@ -19,7 +19,7 @@ const UserModal = () => {
 
   return (
   
-      <div className="w-[300px] ">
+      <div className="w-[300px]">
         <div className="my-3 w-18 h-18 mx-auto">
           <UseAvater />  
         </div>
@@ -28,7 +28,12 @@ const UserModal = () => {
      
         <div className="mt-8 flex flex-col">
         <Link to="/"  className="text-[18px] hover:underline  mb-2">My Order</Link>
-        <Link to="/" className="text-[18px] hover:underline  mb-2">Dashboard</Link>
+        {
+          user.role === "user" ?
+           <Link to="/dashboard" className="text-[18px] hover:underline  mb-2">Dashboard</Link> 
+           :
+            <Link to="/admin-dashboard" className="text-[18px] hover:underline  mb-2">Dashboard</Link>
+        }
         <Link to="/" className="text-[18px] hover:underline  mb-2">Users</Link>
         <Link to="/" className="text-[18px] hover:underline  mb-2">My Account</Link>
 

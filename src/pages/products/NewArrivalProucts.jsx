@@ -1,24 +1,16 @@
 import useNewArrivalsProducts from "@/hooks/useNewArrivalsProducts";
 import ProductCard from "./ProductCard";
 import Loader from "@/components/Loader";
-import { useCart, useFavCart } from "@/hooks";
-
+import { useAddToCart, useFavCart } from "@/hooks";
+import ErrorMsg from "@/components/ErrorMsg";
 
 const NewArrivalProucts = () => {
   const { newProducts, isLoading, isError, error } = useNewArrivalsProducts();
-const { addToCart } = useCart()
-  const { isFav,  toggleFavItem} = useFavCart();
-
-
-
-
-
-
-
-
+  const { addToCart } = useAddToCart();
+  const { isFav, toggleFavItem } = useFavCart();
 
   if (isError) {
-    return <p>Error: {error?.message || "New arrivals Products error"}</p>;
+    return <ErrorMsg msg={error?.message} />;
   }
 
   return (
@@ -32,18 +24,17 @@ const { addToCart } = useCart()
         what’s new now.
       </p>
       <div className="grid grid-cols-4   p-4 gap-5">
-        {isLoading.state ? 
-          
-             <Loader msg={isLoading.message}/> : (
+        {isLoading.state ? (
+          <Loader msg={isLoading.message} />
+        ) : (
           newProducts.map((newProduct) => (
-            <ProductCard 
-            key={newProduct.id} 
-            product={newProduct} 
-             isTopSales = {false}
-            onAddToCart= { addToCart}
+            <ProductCard
+              key={newProduct.id}
+              product={newProduct}
+              isTopSales={false}
+              onAddToCart={addToCart}
               isFav={isFav}
-             onAddToFav={toggleFavItem}
-
+              onAddToFav={toggleFavItem}
             />
           ))
         )}

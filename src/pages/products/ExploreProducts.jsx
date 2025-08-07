@@ -1,14 +1,17 @@
-import { useCart, useFavCart, useProducts } from "@/hooks";
+import { useAddToCart,  useFavCart, useProducts } from "@/hooks";
 import {  useState } from "react";
 import ProductCard from "./ProductCard";
 import Loader from "@/components/Loader";
+import ErrorMsg from "@/components/ErrorMsg";
 
 
 
 const ExploreProducts = () => {
-  const { addToCart } = useCart();
+  // const { addToCart } = useCart();
   const { isFav,  toggleFavItem} = useFavCart();
-  const { data: products, isLoading, isError, error } = useProducts();
+  const { products, isLoading, isError, error } = useProducts();
+  const { addToCart } = useAddToCart();
+
   const [count, setCount] = useState(4);
 
 
@@ -23,7 +26,7 @@ const ExploreProducts = () => {
 
   //show error
   if (isError) {
-    return <p>Error: {error?.message || "Something went wrong"}</p>;
+    return <ErrorMsg msg={error?.message}/>
   }
 
   return (

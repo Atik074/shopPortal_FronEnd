@@ -16,13 +16,10 @@ const useTopSalesProducts =()=> {
 
 
     return {
-        data,
-         isLoading:{
-             state:isLoading ,
-             message:isLoading ? "Top sales Product is Loading..." : " "
-        }, 
-        isError,
-        error
+     TopSalesProducts: data,
+    isLoading,
+    isError,
+    error,
     }
   
 }

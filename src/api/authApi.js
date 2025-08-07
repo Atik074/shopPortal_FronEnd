@@ -1,8 +1,8 @@
 import { app } from "@/config/firease.config";
-import axiosApi from "./axiosApi";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import handleError from "@/lib/handleError";
+import ErrorHandler from "@/lib/ErrorHandler";
 import { saveAuthToLocalStorage } from "@/lib/saveAuthToLocalStorage";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import axiosApi from "./axiosApi";
 
 export const createNewUser = async (userData) => {
   try {
@@ -10,7 +10,7 @@ export const createNewUser = async (userData) => {
 
     return response.data;
   } catch (err) {
-    handleError(err, "create new user failed");
+    ErrorHandler(err, "create new user failed");
   }
 };
 // handle custom login
@@ -21,7 +21,7 @@ export const loggedInUser = async (userData) => {
     saveAuthToLocalStorage(response.data.user, response.data.token);
     return response.data;
   } catch (err) {
-    handleError(err, "user failed to logged in ");
+    ErrorHandler(err, "user failed to logged in ");
   }
 };
 
@@ -36,11 +36,12 @@ export const googleLogin = async () => {
 
     const token = await user.getIdToken();
     const response = await axiosApi.post("/auth/google-login", { token });
-
+     
     saveAuthToLocalStorage(response.data.user, response.data.token);
 
     return response.data.user;
   } catch (err) {
-    handleError(err, "google login failed");
+    ErrorHandler(err, "google login failed");
+    
   }
 };

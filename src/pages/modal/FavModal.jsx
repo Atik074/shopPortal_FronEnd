@@ -1,9 +1,9 @@
-import { useCart, useFavCart } from "@/hooks";
+import { useAddToCart, useFavCart } from "@/hooks";
 import { RxCross1 } from "react-icons/rx";
 
 const FavModal = () => {
   const { favItems, setFavItems } = useFavCart();
-  const { addToCart } = useCart();
+  const { addToCart } = useAddToCart()
 
   //remove from modal
   const handleRemoveFromModal = (id) => {

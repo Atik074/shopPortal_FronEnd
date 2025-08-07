@@ -1,9 +1,9 @@
 import { Navigate } from "react-router-dom";
 
 const AuthProtectedRoute = ({children}) => {
-    const token =JSON.parse(localStorage.getItem("token"))
+    const auth =JSON.parse(localStorage.getItem("auth"))
 
-    if(!token) return <Navigate to="/login" />;
+    if(!auth?.token) return <Navigate to="/login" />;
     return children
 };
 

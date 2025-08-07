@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useProducts } from "../../hooks";
 import Loader from "@/components/Loader";
+import ErrorMsg from "@/components/ErrorMsg";
 
 const AllCategories = () => {
-  const { data: products, isLoading, isError, error } = useProducts();
+  const { products, isLoading, isError, error } = useProducts();
   const [count, setCount] = useState(6);
 
   const handleProductCategories = () => {
     setCount((prev) => prev + 2);
   };
 
-  if (isError) {
-    return (
-      <p>Error: {error?.message || "Something went wrong in categories"}</p>
-    );
+   if (isError) {
+    return <ErrorMsg msg={error?.message}/>
   }
 
   return (

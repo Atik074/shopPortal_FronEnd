@@ -15,13 +15,10 @@ const useProducts =()=>{
 
   
     return {
-       data ,
-        isLoading:{
-             state:isLoading ,
-             message:isLoading ? "Product data is Loading..." : " "
-        },
-        isError,
-        error
+     products:data,
+    isLoading,
+    isError,
+    error,
         
     }
 
