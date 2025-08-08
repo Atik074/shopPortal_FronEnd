@@ -29,10 +29,11 @@ const UserModal = () => {
         <div className="mt-8 flex flex-col">
         <Link to="/"  className="text-[18px] hover:underline  mb-2">My Order</Link>
         {
-          user.role === "user" ?
-           <Link to="/dashboard" className="text-[18px] hover:underline  mb-2">Dashboard</Link> 
-           :
-            <Link to="/admin-dashboard" className="text-[18px] hover:underline  mb-2">Dashboard</Link>
+          user.role === "admin" ?
+          <Link to="/admin-dashboard" className="text-[18px] hover:underline  mb-2">Dashboard</Link>
+            
+           : <Link to="/dashboard" className="text-[18px] hover:underline  mb-2">Dashboard</Link>
+            
         }
         <Link to="/" className="text-[18px] hover:underline  mb-2">Users</Link>
         <Link to="/" className="text-[18px] hover:underline  mb-2">My Account</Link>

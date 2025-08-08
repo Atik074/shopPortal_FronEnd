@@ -6,10 +6,12 @@ import ErrorMsg from "@/components/ErrorMsg";
 
 
 
+
 const ExploreProducts = () => {
   // const { addToCart } = useCart();
   const { isFav,  toggleFavItem} = useFavCart();
   const { products, isLoading, isError, error } = useProducts();
+
   const { addToCart } = useAddToCart();
 
   const [count, setCount] = useState(4);

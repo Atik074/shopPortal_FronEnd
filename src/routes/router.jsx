@@ -10,6 +10,7 @@ import AdminDashboard from "@/pages/dashboard/admin/AdminDashboard";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import AuthProtectedRoute from "./AuthProtectedRoute";
 import Dashboard from "@/pages/dashboard/Dashboard";
+import SingleProduct from "@/pages/products/singleProduct/SingleProduct";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         element: <AdminProtectedRoute>
                <AdminDashboard/>
         </AdminProtectedRoute>  
+      },
+      {
+        path:'/products/:id',
+        element:<SingleProduct/> 
       },
     ],
   },

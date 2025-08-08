@@ -31,3 +31,12 @@ export const getTopSalesProducts = async () => {
     ErrorHandler(err, "fetched failed in top sales products ");
   }
 };
+
+export const getSingleProduct =async(id)=>{
+   try {
+    const response = await axiosApi.get(`/products/${id}`);
+    return replaceMongoIdArray(response?.data?.products);
+  } catch (err) {
+    ErrorHandler(err, "fetched failed in get single product");
+  }
+}
