@@ -1,3 +1,4 @@
+import { createSlug } from "@/lib/createSlug";
 import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -11,6 +12,8 @@ const ProductCard = ({
 }) => {
   const discountPerProduct = (product.price * 10) / 100;
   const { id,name , images, sold, price, description } = product;
+  const slug = createSlug(name)
+
 
   return (
     <div className="relative border border-gray-700 shadow-md ">
@@ -85,7 +88,7 @@ const ProductCard = ({
           >
             Add to cart
           </button>
-          <Link to={`/products/${id}`}
+          <Link to={`/products/${slug}`}
             className="bg-sky-800 text-white  text-[19px] rounded 
                mb-5 cursor-pointer px-3 py-2 hover:bg-amber-600 duration-300 ease-in-out transition-colors"
           >

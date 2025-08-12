@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         </AdminProtectedRoute>  
       },
       {
-        path:'/products/:id',
+        path:'/products/:slug',
         element:<SingleProduct/> 
       },
     ],

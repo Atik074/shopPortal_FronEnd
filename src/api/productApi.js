@@ -1,15 +1,13 @@
-
-import { replaceMongoIdArray } from "@/lib/idConverter";
+import errorHandler from "@/lib/errorHandler";
+import { replaceMongoIdArray, replaceMongoIdObj } from "@/lib/idConverter";
 import axiosApi from "./axiosApi";
-import ErrorHandler from "@/lib/ErrorHandler";
 
 export const getProducts = async () => {
   try {
     const response = await axiosApi.get("/products");
     return replaceMongoIdArray(response?.data?.products);
   } catch (err) {
-  
-    ErrorHandler(err, "fetch failed in get products");
+    errorHandler(err, "fetch failed in get products");
   }
 };
 
@@ -19,7 +17,7 @@ export const getNewArrivalsProducts = async () => {
 
     return replaceMongoIdArray(response?.data?.products);
   } catch (err) {
-    ErrorHandler(err, "fetched failed in new arival products fetched failed");
+    errorHandler(err, "fetched failed in new arival products fetched failed");
   }
 };
 
@@ -28,15 +26,18 @@ export const getTopSalesProducts = async () => {
     const response = await axiosApi.get("/products/top-sales");
     return replaceMongoIdArray(response?.data?.products);
   } catch (err) {
-    ErrorHandler(err, "fetched failed in top sales products ");
+    errorHandler(err, "fetched failed in top sales products ");
   }
 };
 
-export const getSingleProduct =async(id)=>{
-   try {
-    const response = await axiosApi.get(`/products/${id}`);
-    return replaceMongoIdArray(response?.data?.products);
+export const getSingleProduct = async (slug) => {
+  console.log(slug);
+
+  try {
+    const response = await axiosApi.get(`/product/${slug}`);
+
+    return replaceMongoIdObj(response?.data?.product);
   } catch (err) {
-    ErrorHandler(err, "fetched failed in get single product");
+    errorHandler(err, "fetched failed in get single product");
   }
-}
+};

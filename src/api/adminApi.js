@@ -1,4 +1,4 @@
-import ErrorHandler from "@/lib/ErrorHandler";
+import errorHandler from "@/lib/errorHandler";
 import axiosApi from "./axiosApi";
 
 export const getAllAdmin = async () => {
@@ -6,7 +6,7 @@ export const getAllAdmin = async () => {
     const response = await axiosApi.get("/admin");
     return response.data;
   } catch (err) {
-    ErrorHandler(err, "Failed to fetch  All Admin");
+    errorHandler(err, "Failed to fetch  All Admin");
   }
 };
 
@@ -16,6 +16,6 @@ export const makeAdmin = async (id) => {
     const response = await axiosApi.put(`/admin/make-admin/:${id}`);
     return response.data;
   } catch (err) {
-    ErrorHandler(err, "Failed to fetch make admin");
+    errorHandler(err, "Failed to fetch make admin");
   }
 };

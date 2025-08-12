@@ -1,4 +1,4 @@
-import ErrorHandler from "@/lib/ErrorHandler";
+import errorHandler from "@/lib/errorHandler";
 import axiosApi from "./axiosApi";
 
 export const createSubscriber = async (email) => {
@@ -18,6 +18,6 @@ export const checkedSubscriber = async (email) => {
     const res = await axiosApi.get(`/newsletter/check?email=${email}`);
     return res.data.subscribed;
   } catch (err) {
-    ErrorHandler(err, "error in cheack subscriber");
+    errorHandler(err, "error in cheack subscriber");
   }
 };

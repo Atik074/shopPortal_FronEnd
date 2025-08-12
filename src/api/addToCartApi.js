@@ -1,4 +1,4 @@
-import ErrorHandler from "@/lib/ErrorHandler";
+import errorHandler from "@/lib/errorHandler";
 import axiosApi from "./axiosApi";
 
 export const addToCart = async ({ id, quantity }) => {
@@ -10,6 +10,6 @@ export const addToCart = async ({ id, quantity }) => {
 
     return response.data;
   } catch (err) {
-    ErrorHandler(err, "failed to fetch add to cart");
+    errorHandler(err, "failed to fetch add to cart");
   }
 };

@@ -1,17 +1,13 @@
-import { getSingleProduct } from "@/api/productApi"
-import { useQuery } from "@tanstack/react-query"
+import { getSingleProduct } from "@/api/productApi";
+import { useQuery } from "@tanstack/react-query";
 
-const useGetSingleProduct =(id)=>{
-    const {data = [],} = useQuery({
-        queryKey:["product", id], 
-        queryFn:()=>getSingleProduct(id)
-        
-    })
+const useGetSingleProduct = (slug) => {
+  const { data = [] } = useQuery({
+    queryKey: ["product", slug],
+    queryFn: () => getSingleProduct(slug),
+  });
 
-    return {
-     product:data,
-    }
-}
+  return {  product: data };
+};
 
-
-export default useGetSingleProduct  ;
+export default useGetSingleProduct;
