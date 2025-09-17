@@ -1,13 +1,16 @@
 import { addToCart } from "@/api/addToCartApi";
-import { useMutation } from "@tanstack/react-query";
+import {  useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
 const useAddToCart = () => {
+    const queryClient = useQueryClient();
+
   const { mutate } = useMutation({
     mutationFn: addToCart,
 
     onSuccess: (data) => {
       const isAlreadyInCart = data.message.toLowerCase().includes("already");
+        queryClient.invalidateQueries(["cart"]);
 
       Swal.fire({
         position: "top-end",

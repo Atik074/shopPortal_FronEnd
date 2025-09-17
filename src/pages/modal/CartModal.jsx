@@ -1,10 +1,18 @@
 import { useCart } from "@/hooks";
+import useGetCartProducts from "@/hooks/useGetCartProducts";
+
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const CartModal = ({setShow}) => {
   const { cartProducts, increaseQuantity, decreaseQuantity, removeFromCart } =
     useCart();
+      const { cartProduct } = useGetCartProducts();
+
+      
+      console.log(cartProduct.map((product) =>product.image))
+
+   
 
   //handle Total Price In to Cart
   const handleTotalPrice = cartProducts.reduce((total, product) => {
@@ -13,9 +21,15 @@ const CartModal = ({setShow}) => {
 
   return (
     <div className="px-3">
+
+
+     
+        
+      
      
       <div>
-        {cartProducts.length === 0 ? (
+
+        {cartProduct.length === 0 ? (
           <p className="text-[20px] text-center text-white mt-8  rounded font-semibold">
             You haven’t added any products yet
           </p>
@@ -39,14 +53,20 @@ const CartModal = ({setShow}) => {
             </thead>
 
             <tbody>
-              {cartProducts.map((product) => (
+
+             
+
+
+
+              {cartProduct.map((product) => (
                 <tr key={product.id}>
                   <td>
-                    <img
+                    {/* <img
                       src={product?.images[0]?.url}
                       className="w-12 rounded my-2"
                       alt="picture"
-                    />
+                    /> */}
+                   
                   </td>
                   <td className="text-[18px] truncate max-w-[100px]">
                     {product.name}
@@ -85,6 +105,8 @@ const CartModal = ({setShow}) => {
                     </button>
                   </td>
                 </tr>
+
+
               ))}
             </tbody>
           </table> </div>

@@ -25,6 +25,7 @@ const Modal = ({ onClose, favModal, cartModal, userModal }) => {
         {favModal === true ? <FavModal /> : ""}
         {cartModal === true ? <CartModal /> : ""}
         {userModal === true ? <UserModal /> : ""}
+        
 
         <button
           onClick={onClose}

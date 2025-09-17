@@ -1,41 +1,38 @@
-import { useCart, useFavCart } from "@/hooks";
+import { useFavCart } from "@/hooks";
 import { useState } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { FaRegHeart } from "react-icons/fa";
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
 import UseAvater from "@/components/UseAvater";
-
-
-
+import useGetCartProducts from "@/hooks/useGetCartProducts";
 
 const Navbar = () => {
-  const auth = JSON.parse(localStorage.getItem("auth" ))
- 
+  const auth = JSON.parse(localStorage.getItem("auth"));
 
 
-  const { cartProducts } = useCart();
+
+  const { cartProduct } = useGetCartProducts();
+
+    console.log(cartProduct)
+
   const { favItems } = useFavCart();
   const [showModal, setShowModal] = useState(false);
   const [favModal, setFavModal] = useState(false);
-  const [cartModal,setCartModal] = useState(false);
+  const [cartModal, setCartModal] = useState(false);
   const [userModal, setUserModal] = useState(false);
-
 
   //modal show  or hide
   const handleModal = (e) => {
     e.preventDefault();
     setShowModal(!showModal);
-   
   };
-
-  
-
-
 
   return (
     <div className="px-8 py-4">
-      
+
+    
+    
       <div className="flex justify-between  items-center">
         <a href="/" className="text-[28px] font-bold  text-sky-800 ">
           shopStore
@@ -60,8 +57,8 @@ const Navbar = () => {
               onClick={(e) => {
                 handleModal(e);
                 setFavModal(true);
-               setCartModal(false);
-                setUserModal(false)
+                setCartModal(false);
+                setUserModal(false);
               }}
             >
               <FaRegHeart />
@@ -81,51 +78,44 @@ const Navbar = () => {
               href="#"
               onClick={(e) => {
                 handleModal(e);
-               setCartModal(true);
+                setCartModal(true);
                 setFavModal(false);
-                setUserModal(false)
+                setUserModal(false);
               }}
             >
               <BsCart2 />
             </a>
           </li>
-          {cartProducts.length >= 1 && (
+          {cartProduct.length >= 1 && (
             <span
               className="bg-fuchsia-600 border 
                            w-[23px] h-[23px] p-[1px] text-center rounded-full  text-sm absolute right-[109px] -top-[5px] text-white "
             >
-              {cartProducts.length}
+              {cartProduct.length}
             </span>
           )}
 
-          {  auth?.user ? 
+          {auth?.user ? (
             <div className="relative">
-
-
               <li className="mx-6 text-[25px] w-12 h-12">
-            <a
-           
-              href="#"
-              onClick={(e) => {
-                handleModal(e);
-               setUserModal(true);
-               setFavModal(false);
-               setCartModal(false)
-              }}
-            >
-             <UseAvater/>
-            </a>
-          </li>
-                
-              </div>
-         
-               
-                          : 
-                      <li className="x-6 text-[21px] bg-amber-500 px-3 py-1 rounded-md hover:bg-amber-600 hover:text-white transition-all">
-                       <Link to='/login'>Login</Link>
-                        </li>
-                    }
-         
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    handleModal(e);
+                    setUserModal(true);
+                    setFavModal(false);
+                    setCartModal(false);
+                  }}
+                >
+                  <UseAvater />
+                </a>
+              </li>
+            </div>
+          ) : (
+            <li className="x-6 text-[21px] bg-amber-500 px-3 py-1 rounded-md hover:bg-amber-600 hover:text-white transition-all">
+              <Link to="/login">Login</Link>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -136,10 +126,11 @@ const Navbar = () => {
             favModal={favModal}
             cartModal={cartModal}
             userModal={userModal}
+            cartProduct={cartProduct}
           />
         )}
       </div>
-      
+
       <hr className="my-3 w-full" />
     </div>
   );
