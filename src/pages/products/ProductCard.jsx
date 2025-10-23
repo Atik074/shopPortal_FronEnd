@@ -15,6 +15,8 @@ const ProductCard = ({
   const slug = createSlug(name)
 
 
+
+
   return (
     <div className="relative border border-gray-700 shadow-md ">
       <div className=" overflow-hidden ">

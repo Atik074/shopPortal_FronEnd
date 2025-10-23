@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const { cartProduct } = useGetCartProducts();
 
-    console.log(cartProduct)
+  
 
   const { favItems } = useFavCart();
   const [showModal, setShowModal] = useState(false);

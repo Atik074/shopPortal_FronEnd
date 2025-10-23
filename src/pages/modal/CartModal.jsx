@@ -1,18 +1,15 @@
+import Quantity from "@/components/Quantity";
 import { useCart } from "@/hooks";
 import useGetCartProducts from "@/hooks/useGetCartProducts";
-
-import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const CartModal = ({setShow}) => {
-  const { cartProducts, increaseQuantity, decreaseQuantity, removeFromCart } =
-    useCart();
-      const { cartProduct } = useGetCartProducts();
+const CartModal = ({ setShow }) => {
+  const { cartProducts, removeFromCart } = useCart();
+  const { cartProduct } = useGetCartProducts();
+  
 
-      
-      console.log(cartProduct.map((product) =>product.image))
 
-   
+
 
   //handle Total Price In to Cart
   const handleTotalPrice = cartProducts.reduce((total, product) => {
@@ -21,95 +18,68 @@ const CartModal = ({setShow}) => {
 
   return (
     <div className="px-3">
-
-
-     
-        
-      
-     
       <div>
-
         {cartProduct.length === 0 ? (
           <p className="text-[20px] text-center text-white mt-8  rounded font-semibold">
             You haven’t added any products yet
           </p>
         ) : (
           <div className="w-[600px]">
-         
-          <h2 className="text-2xl mb-4 text-center underline ">
-          My Cart Products  
-        </h2>
-          <table className="w-full border-collapse ">
-            <thead>
-              <tr className="border-b-2 text-[18px] m-3">
-                <th className="text-start ">Image</th>
-                <th className="text-start">Product</th>
-                <th className="text-center">Price</th>
-                <th className="text-center">Quantity</th>
-                <th className="text-center">Actions</th>
-                <th className="text-center">Total</th>
-                <th className="text-right">Remove</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-             
-
-
-
-              {cartProduct.map((product) => (
-                <tr key={product.id}>
-                  <td>
-                    {/* <img
-                      src={product?.images[0]?.url}
-                      className="w-12 rounded my-2"
-                      alt="picture"
-                    /> */}
-                   
-                  </td>
-                  <td className="text-[18px] truncate max-w-[100px]">
-                    {product.name}
-                  </td>
-                  <td className="text-center text-[16px]">{product.price}</td>
-                  <td className="text-center text-[16px]">
-                    {product.quantity}
-                  </td>
-                  <td className="text-center">
-                    <button
-                      onClick={() => decreaseQuantity(product.id)}
-                      disabled={product.quantity === 1}
-                      className="text-white p-1 text-[14px] rounded cursor-pointer border  disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <FaMinus />
-                    </button>
-
-                    <button
-                      onClick={() => increaseQuantity(product.id)}
-                      disabled={product.stock === 1}
-                      className="text-white text-[14px]  p-1 rounded mx-3 cursor-pointer border  disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <FaPlus />
-                    </button>
-                  </td>
-                  <td className="text-right text-[16px]">
-                    {product.price * product.quantity}
-                  </td>
-                  <td className="text-center text-xl font-bold ">
-                    <button
-                      className="cursor-pointer"
-                      onClick={() => removeFromCart(product.id)}
-                    >
-                      {" "}
-                      X
-                    </button>
-                  </td>
+            <h2 className="text-xl mb-4 text-center underline ">
+              My Cart Products
+            </h2>
+            <table className="w-full border-collapse ">
+              <thead>
+                <tr className="border-b-2 text-[17px] m-3">
+                  <th className="text-start ">Image</th>
+                  <th className="text-start">Product</th>
+                  <th className="text-center">Price</th>
+                  <th className="text-center">Quantity</th>
+                  <th className="text-center">Total</th>
+                  <th className="text-right">Remove</th>
                 </tr>
+              </thead>
 
+              <tbody>
+                {cartProduct.map((product) => (
+                  <tr key={product.id}>
+                    <td>
+                      {product.image.map((img, index) =>
+                        index === 0 ? (
+                          <img
+                            key={img._id}
+                            src={img.url}
+                            alt={product.name}
+                            className="w-10 rounded mt-4"
+                          />
+                        ) : null
+                      )}
+                    </td>
+                    <td className="text-[16px] truncate max-w-[100px]">
+                      {product.name}
+                    </td>
+                    <td className="text-center text-[16px]">{product.price}</td>
 
-              ))}
-            </tbody>
-          </table> </div>
+                    <td className="flex items-center justify-center mt-5">
+                      <Quantity product={product} />
+                    </td>
+                    <td className="text-right text-[16px]">
+                      {product.price * product.quantity}
+                    </td>
+                    <td className="text-center text-xl font-bold ">
+                      <button
+                        className="cursor-pointer"
+                        onClick={() => removeFromCart(product.id)}
+                      >
+                        {" "}
+                        X
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>{" "}
+          </div>
         )}
 
         {cartProducts.length >= 1 && (
@@ -118,8 +88,8 @@ const CartModal = ({setShow}) => {
               Total Price : {handleTotalPrice}tk
             </p>
 
-            <Link 
-             onClick={()=>setShow(false)}
+            <Link
+              onClick={() => setShow(false)}
               to="/checkout"
               className="
           px-3 py-2 cursor-pointer border-[2px] border-white text-[19px] font-bold rounded bg-sky-600 hover:bg-sky-700 text-center"
