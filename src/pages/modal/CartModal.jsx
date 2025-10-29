@@ -1,20 +1,32 @@
 import Quantity from "@/components/Quantity";
 import { useCart } from "@/hooks";
 import useGetCartProducts from "@/hooks/useGetCartProducts";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const CartModal = ({ setShow }) => {
-  const { cartProducts, removeFromCart } = useCart();
+  const {  removeFromCart } = useCart();
   const { cartProduct } = useGetCartProducts();
-  
+  const [products, setProducts] = useState(() => {
+    const cartItems = localStorage.getItem("CartItems");
+    return cartItems ? JSON.parse(cartItems) : cartProduct;
+  });
+ 
 
 
+
+   //save products local staorage to show price by clicking quantity
+  useEffect(() => {
+    localStorage.setItem("CartItems", JSON.stringify(products));
+  }, [products]);
 
 
   //handle Total Price In to Cart
-  const handleTotalPrice = cartProducts.reduce((total, product) => {
+  const handleTotalPrice = products.reduce((total, product) => {
     return total + product.price * product.quantity;
   }, 0);
+
+  console.log(handleTotalPrice)
 
   return (
     <div className="px-3">
@@ -41,7 +53,7 @@ const CartModal = ({ setShow }) => {
               </thead>
 
               <tbody>
-                {cartProduct.map((product) => (
+                {products.map((product) => (
                   <tr key={product.id}>
                     <td>
                       {product.image.map((img, index) =>
@@ -61,7 +73,7 @@ const CartModal = ({ setShow }) => {
                     <td className="text-center text-[16px]">{product.price}</td>
 
                     <td className="flex items-center justify-center mt-5">
-                      <Quantity product={product} />
+                      <Quantity setProducts={setProducts} product={product} />
                     </td>
                     <td className="text-right text-[16px]">
                       {product.price * product.quantity}
@@ -82,7 +94,9 @@ const CartModal = ({ setShow }) => {
           </div>
         )}
 
-        {cartProducts.length >= 1 && (
+
+
+ {products.length >= 1 && (
           <div className="flex flex-col ">
             <p className="text-xl text-end mb-4 mt-6 font-semibold text-amber-400 mr-14">
               Total Price : {handleTotalPrice}tk
@@ -99,6 +113,18 @@ const CartModal = ({ setShow }) => {
             </Link>
           </div>
         )}
+
+
+
+
+
+
+
+
+
+
+
+       
       </div>
     </div>
   );
